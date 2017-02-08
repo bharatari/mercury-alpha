@@ -10,12 +10,7 @@ After cloning this repository, you'll have to add a `.env` file to the root proj
     SOCIAL_HOOK=<slack webhook url>
     RADIO_HOOK=<slack webhook url>
 
-Finally, to be able to run the application, you'll have to transpile the source files:
+Finally, to be able to run the application, you'll have to install dependencies and transpile the source files:
 
 1. `npm install` to install project dependencies
-2. `npm run build` to transpile the source files
-3. `npm start` to start the application
-
-# Development
-
-Don't forget to `npm run build` everytime you make changes to the source files. Otherwise, you'll keep running the transpiled version of older code.
+2. `npm start` to transpile the source files and start the application

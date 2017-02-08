@@ -1,5 +1,6 @@
 import graph from 'fbgraph';
 import moment from 'moment';
+import request from 'request';
 
 /**
  * Make sure the access token has the following scopes:

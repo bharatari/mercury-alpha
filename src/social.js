@@ -23,7 +23,7 @@ export default {
         const second = res.data[0].values[1].value;
 
         if (latest < second) {
-          const percentDiff = ((1 - (latest / second)) * 100).toFixed(0);
+          const percentDiff = ((1 - (latest / second)) * 100).toFixed(2);
 
           this.postToSocial({
             pretext: 'Fewer users engaged with our page this week :caramoji:',
@@ -33,7 +33,7 @@ export default {
             cb();
           });
         } else if (latest > second) {
-          const percentDiff = ((1 - (second / latest)) * 100).toFixed(0);
+          const percentDiff = ((1 - (second / latest)) * 100).toFixed(2);
 
           this.postToSocial({
             pretext: 'More users engaged with our page this week!',
@@ -43,8 +43,6 @@ export default {
             cb();
           });
         } else {
-          const percentDiff = (latest / second).toFixed(2);
-
           this.postToSocial({
             pretext: 'The exact same number of users engaged with our page this week as compared to last week',
             text: 'Crazy stuff',

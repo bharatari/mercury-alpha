@@ -35,5 +35,5 @@ export default function record(cb) {
       stream.end();
       cb();
     });
-  }, 3780000);
+  }, 4200000);
 }

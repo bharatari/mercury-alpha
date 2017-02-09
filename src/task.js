@@ -5,7 +5,7 @@ import social from './social';
 const CronJob = cron.CronJob;
 
 export default function task() {
-  const recordJob = new CronJob('58 12 * * 4', () => {
+  const recordJob = new CronJob('57 12 * * 4', () => {
     console.log('Recorder Running');
 
     record(() => {

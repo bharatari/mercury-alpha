@@ -1,5 +1,5 @@
 {
-  "name": "mercury-alpha",
+  "name": "mercury-ion",
   "version": "1.0.0",
   "description": "A set of utilities designed for The Mercury.",
   "main": "./dist/index.js",

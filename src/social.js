@@ -10,10 +10,36 @@ import request from 'request';
  * The Access Token Tool allows you to debug and extend access tokens for longer term use.
  */
 export default {
-  postedADraft() {
+  dailySocial() {
+    console.log('Checking Daily Social Stats');
 
+    social.checkFeed((err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('Checked Feed');
+      }
+    });
+
+    social.checkLikes((err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('Checked Likes');
+      }
+    });
   },
+  weeklySocial() {
+    console.log('Checking Weekly Social Stats');
 
+    social.checkEngagement((err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('Checked Engagement');
+      }
+    });
+  },
   checkEngagement(cb) {
     graph.setAccessToken(process.env.FB_TOKEN);
 

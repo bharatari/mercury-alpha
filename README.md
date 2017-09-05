@@ -13,8 +13,18 @@ After cloning this repository, you'll have to add a `.env` file to the root proj
 You will also have to add a `config.js` file to the root project directory:
 
     export default {
-        radio: true,
-        social: true,
+        record: {
+            task: true,
+            now: false,
+        },
+        dailySocial: {
+            task: true,
+            now: false,
+        },
+        weeklySocial: {
+            task: true,
+            now: false,
+        },
     }
 
 The configuration file declares what features should run when the server starts. All features are implicitly disabled by default. You must explicitly enable them in the configuration file.

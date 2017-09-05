@@ -4,8 +4,8 @@ import social from './social';
 
 const CronJob = cron.CronJob;
 
-export default function task() {
-  const recordJob = new CronJob('57 12 * * 4', () => {
+export function recordTask() {
+  const job = new CronJob('57 12 * * 4', () => {
     console.log('Recorder Running');
 
     record(() => {
@@ -13,39 +13,21 @@ export default function task() {
     });
   });
 
-  const dailySocialJob = new CronJob('0 11 * * *', () => {
-    console.log('Checking Daily Social Stats');
+  job.start();
+}
 
-    social.checkFeed((err) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log('Checked Feed');
-      }
-    });
-
-    social.checkLikes((err) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log('Checked Likes');
-      }
-    });
+export function dailySocialTask() {
+  export const job = new CronJob('0 11 * * *', () => {
+    social.dailySocial();
   });
 
-  const weeklySocialJob = new CronJob('0 11 7 * 1', () => {
-    console.log('Checking Weekly Social Stats');
+  job.start();
+}
 
-    social.checkEngagement((err) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log('Checked Engagement');
-      }
-    });
+export function weeklySocialTask() {
+  export const job = new CronJob('0 11 7 * 1', () => {
+    social.weeklySocial();
   });
 
-  recordJob.start();
-  dailySocialJob.start();
-  weeklySocialJob.start();
+  job.start();
 }

@@ -1,15 +1,43 @@
 const dotenv = require('dotenv').config();
 
-import task from './task';
+import { recordTask, dailySocialTask, weeklySocialTask } from './task';
 import record from './record';
 import social from './social';
 
 import config from './config';
 
-if (config.social) {
-  social();
+if (config.dailySocial) {
+  const { task, now } = config.dailySocial;
+
+  if (task) {
+    dailySocialTask();
+  }
+
+  if (now) {
+    social.dailySocial();
+  }
 }
 
-if (config.radio) {
-  task();
+if (config.weeklySocial) {
+  const { task, now } = config.weeklySocial;
+
+  if (task) {
+    weeklySocialTask();
+  }
+
+  if (now) {
+    social.weeklySocial();
+  }
+}
+
+if (config.record) {
+  const { task, now } = config.record;
+
+  if (task) {
+    recordTask();
+  }
+
+  if (now) {
+    record();
+  }
 }

@@ -10,6 +10,15 @@ After cloning this repository, you'll have to add a `.env` file to the root proj
     SOCIAL_HOOK=<slack webhook url>
     RADIO_HOOK=<slack webhook url>
 
+You will also have to add a `config.js` file to the root project directory:
+
+    export default {
+        radio: true,
+        social: true,
+    }
+
+The configuration file declares what features should run when the server starts. All features are implicitly disabled by default. You must explicitly enable them in the configuration file.
+
 Finally, to be able to run the application, you'll have to install dependencies and transpile the source files:
 
 1. `npm install` to install project dependencies

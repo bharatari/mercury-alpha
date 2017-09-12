@@ -29,6 +29,8 @@ You will also have to add a `config.js` file to the root project directory:
 
 The configuration file declares what features should run when the server starts. All features are implicitly disabled by default. You must explicitly enable them in the configuration file.
 
+Create an `output` folder in the root project directory to hold recordings.
+
 Finally, to be able to run the application, you'll have to install dependencies and transpile the source files:
 
 1. `npm install` to install project dependencies

@@ -1,11 +1,12 @@
 import cron from 'cron';
 import record from './record';
 import social from './social';
+import config from './config';
 
 const CronJob = cron.CronJob;
 
-export function recordTask() {
-  const job = new CronJob('57 12 * * 4', () => {
+export function recordTask(crontab) {
+  const job = new CronJob(crontab, () => {
     console.log('Recorder Running');
 
     record(() => {
@@ -17,7 +18,7 @@ export function recordTask() {
 }
 
 export function dailySocialTask() {
-  export const job = new CronJob('0 11 * * *', () => {
+  const job = new CronJob('0 11 * * *', () => {
     social.dailySocial();
   });
 
@@ -25,7 +26,7 @@ export function dailySocialTask() {
 }
 
 export function weeklySocialTask() {
-  export const job = new CronJob('0 11 7 * 1', () => {
+  const job = new CronJob('0 11 7 * 1', () => {
     social.weeklySocial();
   });
 

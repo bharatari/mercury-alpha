@@ -31,10 +31,10 @@ if (config.weeklySocial) {
 }
 
 if (config.record) {
-  const { task, now } = config.record;
+  const { task, now, crontab } = config.record;
 
   if (task) {
-    recordTask();
+    recordTask(crontab);
   }
 
   if (now) {

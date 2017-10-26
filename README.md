@@ -16,6 +16,7 @@ You will also have to add a `config.js` file to the root project directory:
         record: {
             task: true,
             now: false,
+            crontab: ['57 9 * * 2', '57 9 * * 5']
         },
         dailySocial: {
             task: true,

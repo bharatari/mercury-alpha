@@ -1,5 +1,5 @@
 import Config from './Config';
-import Record from '../features/record/record';
+import Record from '../features/record/Record';
 import WeeklySocial from '../features/social/WeeklySocial';
 import DailySocial from '../features/social/DailySocial';
 import Runner from './Runner';

@@ -35,7 +35,7 @@ export default class Record implements IRunner {
       
       const url = `https://newshub.nyc3.digitaloceanspaces.com/${filename}`;
       await this.postToSlack(`Recording uploaded to ${url}`)
-    }, 4000);
+    }, 4200000);
   }
 
   private postToSlack(text: string): Promise<any> {

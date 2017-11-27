@@ -12,6 +12,8 @@ export default class Run {
   async start() {
     const config = await Config.load('config.json');
 
+    console.log(`Running Mercury Ion v${process.env.npm_package_version}`);
+
     const dailySocial = new DailySocial();
     this.dailySocialRunner = new Runner<DailySocial>(config.dailySocial, dailySocial);
     await this.dailySocialRunner.start();

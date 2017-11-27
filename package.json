@@ -5,7 +5,7 @@
   "main": "./dist/index.js",
   "scripts": {
     "start": "npm run build && node dist/index.js",
-    "build": "babel src config.js -d dist",
+    "build": "tsc",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "forever": "npm run build && pm2 start ./dist/index.js -i max --attach",
@@ -23,6 +23,10 @@
     "request": "^2.79.0"
   },
   "devDependencies": {
+    "@types/cron": "^1.2.1",
+    "@types/lodash": "^4.14.85",
+    "@types/node": "^8.0.53",
+    "@types/request-promise-native": "^1.0.10",
     "babel-cli": "^6.22.2",
     "babel-preset-latest": "^6.22.0",
     "eslint": "^3.15.0",
@@ -30,5 +34,6 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.9.0"
+    "typescript": "^2.6.1"
   }
 }

@@ -59,4 +59,4 @@ dist/
 output/
 
 # Configuration file
-config.js
+config.json

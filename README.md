@@ -9,24 +9,29 @@ After cloning this repository, you'll have to add a `.env` file to the root proj
     FB_TOKEN=<facebook access token>
     SOCIAL_HOOK=<slack webhook url>
     RADIO_HOOK=<slack webhook url>
+    DO_SPACES_ACCESS_KEY_ID=<key_id>
+    DO_SPACES_SECRET_ACCESS_KEY=<access_key>
 
-You will also have to add a `config.js` file to the root project directory:
+You will also have to add a `config.json` file to the root project directory:
 
-    export default {
-        record: {
-            task: true,
-            now: false,
-            crontab: ['57 9 * * 2', '57 9 * * 5'],
+    {
+        "record": {
+            "task": true,
+            "now": false,
+            "crontab": ["57 9 * * 2", "57 9 * * 5"]
         },
-        dailySocial: {
-            task: true,
-            now: false,
+        "dailySocial": {
+            "task": false,
+            "now": false,
+            "crontab": ["0 11 * * *"]
         },
-        weeklySocial: {
-            task: true,
-            now: false,
-        },
+        "weeklySocial": {
+            "task": false,
+            "now": false,
+            "crontab": ["0 11 7 * 1"]
+        }
     }
+
 
 The configuration file declares what features should run when the server starts. All features are implicitly disabled by default. You must explicitly enable them in the configuration file.
 

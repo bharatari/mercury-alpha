@@ -2,12 +2,14 @@ import * as fs from 'fs' ;
 import * as request from 'request-promise-native';
 import * as path from 'path';
 import * as s3 from 's3';
+import * as moment from 'moment';
 
 import IRunner from '../../interfaces/IRunner';
 
 export default class Record implements IRunner {
   async run() {
-    const filename = `${Date.now()}.mp3`;
+    const date = moment().format('MM-DD-YY');
+    const filename = `${date}-${Date.now()}.mp3`;
 
     console.log('Start Recording');
 

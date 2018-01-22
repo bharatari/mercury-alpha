@@ -1,5 +1,6 @@
 import * as fs from 'fs' ;
-import * as request from 'request-promise-native';
+import * as request from 'request';
+import * as rp from 'request-promise-native';
 import * as path from 'path';
 import * as s3 from 's3';
 import * as moment from 'moment';
@@ -17,7 +18,7 @@ export default class Record implements IRunner {
 
     const filepath = path.normalize(path.join('./output', filename));
 
-    const stream = await request('http://rubix.wavestreamer.com:3203/Live')
+    const stream = request('http://rubix.wavestreamer.com:3203/Live')
                     .pipe(fs.createWriteStream(filepath));
 
     setTimeout(async () => {
@@ -41,7 +42,7 @@ export default class Record implements IRunner {
   }
 
   private postToSlack(text: string): Promise<any> {
-    return request({
+    return rp({
       method: 'POST',
       url: process.env.RADIO_HOOK,
       body: {

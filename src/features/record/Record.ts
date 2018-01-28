@@ -6,11 +6,16 @@ import * as s3 from 's3';
 import * as moment from 'moment';
 
 import IRunner from '../../interfaces/IRunner';
+import { setTimeout } from 'timers';
+import { Moment } from 'moment';
 
 export default class Record implements IRunner {
   async run() {
     const date = moment().format('MM-DD-YY');
     const filename = `${date}-${Date.now()}.mp3`;
+
+    const milliseconds = 4200000;
+    const endTime = moment().add(milliseconds, 'milliseconds');
 
     console.log('Start Recording');
 
@@ -18,14 +23,19 @@ export default class Record implements IRunner {
 
     const filepath = path.normalize(path.join('./output', filename));
 
-    const stream = request('http://rubix.wavestreamer.com:3203/Live')
-                    .pipe(fs.createWriteStream(filepath));
+    let stream: any;
+
+    try {
+      stream = await this.retryForever(this.stream, filepath, endTime);
+    } catch (e) {
+      console.log(e);
+    }
 
     setTimeout(async () => {
       console.log('Ending Recording');
 
       await this.postToSlack('Ending recording');
-     
+
       stream.end();
 
       let data: any;
@@ -38,7 +48,38 @@ export default class Record implements IRunner {
       
       const url = `https://newshub.nyc3.digitaloceanspaces.com/${filename}`;
       await this.postToSlack(`Recording uploaded to ${url}`)
-    }, 4200000);
+    }, milliseconds);
+  }
+
+  private retryForever(fn: any, ...args: Array<any>) {
+    return fn(...args).catch((err: any) => {
+      console.log(err);
+      console.log('Retrying');
+      
+      return this.retryForever(fn, ...args); 
+    });
+  }
+
+  private stream(filepath: any, endTime: Moment): Promise<any> {
+    return new Promise((resolve, reject) => {
+      console.log('Streaming');
+
+      const remaining = moment(endTime).diff(moment());
+
+      let stream = request('http://rubix.wavestreamer.com:3203/Live')
+        .on('error', function (err) {
+          console.log(err);
+
+          stream.end();
+
+          reject(err);
+        })
+        .pipe(fs.createWriteStream(filepath));
+
+      setTimeout(() => {
+        resolve(stream);
+      }, remaining);
+    });
   }
 
   private postToSlack(text: string): Promise<any> {

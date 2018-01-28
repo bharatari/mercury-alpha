@@ -31,24 +31,23 @@ export default class Record implements IRunner {
       console.log(e);
     }
 
-    setTimeout(async () => {
-      console.log('Ending Recording');
+    console.log('Ending Recording');
 
-      await this.postToSlack('Ending recording');
+    await this.postToSlack('Ending recording');
 
-      stream.end();
+    stream.end();
 
-      let data: any;
+    let data: any;
 
-      try {
-        data = await this.upload(filepath, filename, stream);
-      } catch (e) {
-        throw e;
-      }
-      
-      const url = `https://newshub.nyc3.digitaloceanspaces.com/${filename}`;
-      await this.postToSlack(`Recording uploaded to ${url}`)
-    }, milliseconds);
+    try {
+      data = await this.upload(filepath, filename, stream);
+    } catch (e) {
+      throw e;
+    }
+    
+    const url = `https://newshub.nyc3.digitaloceanspaces.com/${filename}`;
+    
+    await this.postToSlack(`Recording uploaded to ${url}`);
   }
 
   private retryForever(fn: any, ...args: Array<any>) {
@@ -77,6 +76,8 @@ export default class Record implements IRunner {
         .pipe(fs.createWriteStream(filepath));
 
       setTimeout(() => {
+        console.log('Resolving');
+
         resolve(stream);
       }, remaining);
     });
